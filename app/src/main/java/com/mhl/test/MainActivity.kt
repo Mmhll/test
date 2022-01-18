@@ -13,6 +13,7 @@ import java.util.regex.Pattern
 
 
 class MainActivity : AppCompatActivity() {
+    //Объявление переменных
     private lateinit var auth: FirebaseAuth
     private lateinit var emailText : EditText
     private lateinit var passwordText : EditText
@@ -38,9 +39,11 @@ class MainActivity : AppCompatActivity() {
                 //Firebase вход через email и password, полученные из полей emailText и passwordText
                 signIn(emailText.text.toString(), passwordText.text.toString())
             }
+
             else if (!checkEmail(emailText.text.toString())){
                 emailText.error = "Вы ввели почту неверно"
             }
+
             else if (!checkPassword(passwordText.text.toString())){
                 passwordText.error = "Вы ввели пароль неверно"
             }
@@ -53,12 +56,11 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val currentUser = auth.currentUser
         if (currentUser != null){
-            //Если пользователь авторизован, идёт переход на окно с объектами
+            //Если пользователь авторизован, идёт переход на окно с недвижимостью
             intentToMain()
         }
     }
     private fun signIn(email: String, password: String) {
-        // [START sign_in_with_email]
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -69,24 +71,23 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Такого пользователя не существует или вы ввели неправильный логин/пароль, попробуйте снова", Toast.LENGTH_SHORT).show()
                 }
             }
-        // [END sign_in_with_email]
     }
 
 
-    private fun intentToMain(){
+    private fun intentToMain(){//Переход на окно с недвижимостью
         val intent : Intent = Intent(this, ObjectActivity::class.java)
         startActivity(intent)
         finish()
     }
 
 
-    private fun checkEmail(mail : String): Boolean {
+    private fun checkEmail(mail : String): Boolean {//Проверка email при помощи regex
+
         var pattern = Pattern.compile("[a-zA-Z0-9\\_\\-]{3,32}" +
                 "\\@" +
                 "[a-zA-Z]{2,12}" +
                 "\\." +
                 "[a-zA-Z]{2,6}")
-        //Проверка email при помощи regex
         return pattern.matcher(mail).matches()
     }
 

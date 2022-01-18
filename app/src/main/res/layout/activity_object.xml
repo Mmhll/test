@@ -7,4 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".ObjectActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <androidx.appcompat.widget.Toolbar
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="#ccffcc"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <Button
+        android:id="@+id/logout_button"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:text="Выйти"
+        android:layout_marginRight="15dp"
+        android:textAllCaps="false"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right" />
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="left"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:backgroundTint="#FFFFFF"
+        android:text="Создать"/>
+
+  </androidx.appcompat.widget.Toolbar>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
