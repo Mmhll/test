@@ -31,5 +31,10 @@ class ObjectActivity : AppCompatActivity() {
             //Завершение текущей активности
             finish()
         }
+        createButton.setOnClickListener {
+            //Переход на экран создания недвижимости
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

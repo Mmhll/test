@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun intentToMain(){//Переход на окно с недвижимостью
-        val intent : Intent = Intent(this, ObjectActivity::class.java)
+        val intent = Intent(this, ObjectActivity::class.java)
         startActivity(intent)
         finish()
     }
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun checkPassword(password : String) : Boolean {
+    private fun checkPassword(password : String) : Boolean {//Проверка пароля через regex
         var pattern = Pattern.compile("[a-zA-Z0-9]{6,30}")
         return pattern.matcher(password).matches()
     }
