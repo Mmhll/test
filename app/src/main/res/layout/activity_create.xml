@@ -6,28 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".CreateActivity">
 
+
     <Button
         android:id="@+id/add_image_button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="30dp"
         android:backgroundTint="@color/blue"
         android:text="Добавить изображение"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/address_input"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Адрес"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +36,11 @@
 
     <EditText
         android:id="@+id/space_input"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:inputType="numberDecimal"
         android:hint="Площадь"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +48,10 @@
 
     <EditText
         android:id="@+id/cost_input"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:inputType="numberDecimal"
         android:ems="10"
         android:hint="Цена"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,9 +61,9 @@
     <EditText
         android:id="@+id/rooms_input"
         android:layout_width="wrap_content"
-        android:layout_marginTop="20dp"
-
         android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Количество комнат"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,12 +74,45 @@
         android:id="@+id/floor_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:ems="10"
         android:hint="Этаж"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rooms_input" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_marginTop="20dp"
+        android:textSize="25dp"
+        android:text="Добавить недвижимость"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <Button
+        android:id="@+id/add_object_button"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="20dp"
+        android:text="Добавить"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/floor_input" />
+    <ImageView
+        android:id="@+id/imageeee"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
