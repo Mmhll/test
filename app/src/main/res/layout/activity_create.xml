@@ -110,7 +110,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floor_input" />
     <ImageView
-        android:id="@+id/imageeee"
+        android:id="@+id/image_get"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
