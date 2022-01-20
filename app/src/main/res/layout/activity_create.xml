@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/changeDataText" />
 
     <EditText
         android:id="@+id/address_input"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rooms_input" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/changeDataText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-3<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     android:padding="30dp"
     tools:context=".ChangeActivity">
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/changeDataText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
@@ -38,7 +38,7 @@
         android:layout_marginTop="50dp"
         android:text="Площадь"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/changeDataText" />
 
     <EditText
         android:id="@+id/change_cost"
