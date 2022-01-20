@@ -18,12 +18,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.awaitAll
+import java.lang.Exception
 
 class ObjectActivity : AppCompatActivity() {
 
     private lateinit var logoutButton: Button
     private lateinit var createButton: Button
     private lateinit var recyclerView: RecyclerView
+    private var keyArrayList = arrayListOf<String>()
     val myRef : DatabaseReference = FirebaseDatabase.getInstance("https://test-c0aba-default-rtdb.europe-west1.firebasedatabase.app").getReference("EstateObjects")
     lateinit var arrayList : ArrayList<EstateObject>
 
@@ -67,10 +69,26 @@ class ObjectActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     arrayList.clear()
                     for (dataSnap in snapshot.children){
+                        keyArrayList.add(dataSnap.key.toString())
                         val estateObject = dataSnap.getValue(EstateObject::class.java)
                         arrayList.add(estateObject!!)
                     }
-                    recyclerView.adapter = EstateAdapter(this@ObjectActivity, arrayList)
+                    var adapter = EstateAdapter(this@ObjectActivity, arrayList)
+                    recyclerView.adapter = adapter
+                    adapter.setOnItemClickListener(object : EstateAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            try {
+                                var intent = Intent(this@ObjectActivity, ChosenActivity::class.java)
+                                intent.putExtra("FirebaseID", keyArrayList[position])
+                                startActivity(intent)
+                            }
+                            catch(e : Exception){
+                                Log.d("Error", e.toString())
+                            }
+                        }
+
+                    })
+
                 }
             }
 
