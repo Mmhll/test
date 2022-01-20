@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test">
         <activity
+            android:name=".ChangeActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChosenActivity"
             android:exported="true" />
         <activity
