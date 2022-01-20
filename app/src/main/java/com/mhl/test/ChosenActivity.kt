@@ -3,6 +3,7 @@ package com.mhl.test
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -39,6 +40,7 @@ class ChosenActivity : AppCompatActivity() {
 
         var bundle : Bundle? = intent.extras
         objectId = bundle?.getString("FirebaseID").toString()
+        Log.d("TAG", objectId)
         myRef.child(objectId).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 estateObject = snapshot.getValue(EstateObject::class.java)!!

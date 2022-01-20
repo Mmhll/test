@@ -48,8 +48,10 @@ class ChangeActivity : AppCompatActivity() {
             estateObject.rooms = roomsInput.text.toString().toInt()
             estateObject.floor = floorInput.text.toString().toInt()
 
-            myRef.child(objectId).setValue(estateObject)
-            finish()
+            myRef.child(objectId).setValue(estateObject).addOnCompleteListener {
+                finish()
+            }
+
         }
 
     }

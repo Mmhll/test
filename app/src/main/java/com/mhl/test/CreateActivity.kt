@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -59,11 +61,9 @@ class CreateActivity : AppCompatActivity() {
 
         addObjectButton.setOnClickListener {
             //Проверка всех полей на пустоту
-            if (emptyText(addressText) and emptyText(spaceText) and emptyText(costText) and emptyText(roomText) and emptyText(floorText) and !selectedImage.equals(null)){
+            if (emptyText(addressText) and emptyText(spaceText) and emptyText(costText) and emptyText(roomText) and emptyText(floorText) and (selectedImage != Uri.EMPTY)){
                 //Добавление изображения в FirebaseStorage и добавление пользователя в Realtime Database
                 uploadImage(selectedImage)
-                //Переход на главный экран
-                intentToObject()
             }
             else{
                 Toast.makeText(this, "Одно или несколько полей не заполнены", Toast.LENGTH_SHORT)
@@ -105,13 +105,17 @@ class CreateActivity : AppCompatActivity() {
             roomText.text.toString().toInt(),
             floorText.text.toString().toInt())
         //Добавление объекта estate в Firebase Realtime Database
-        myRef.child(dateNow).setValue(estate)
+        myRef.child(dateNow).setValue(estate).addOnCompleteListener {
+            intentToObject()
+        }
     }
 
     private fun intentToObject(){
-        val intent = Intent(this, ObjectActivity::class.java)
+        val intent = Intent(this@CreateActivity, ChosenActivity::class.java)
+        intent.putExtra("FirebaseID", dateNow)
         startActivity(intent)
         finish()
+
     }
 
 
