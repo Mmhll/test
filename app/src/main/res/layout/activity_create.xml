@@ -41,6 +41,7 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="numberDecimal"
+        android:maxLength="8"
         android:hint="Площадь"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:maxLength="18"
         android:inputType="numberDecimal"
         android:ems="10"
         android:hint="Цена"
@@ -63,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:maxLength="3"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="Количество комнат"
@@ -77,6 +80,7 @@
         android:layout_marginTop="20dp"
         android:inputType="number"
         android:ems="10"
+        android:maxLength="3"
         android:hint="Этаж"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,10 +113,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/floor_input" />
-    <ImageView
-        android:id="@+id/image_get"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

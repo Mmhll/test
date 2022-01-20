@@ -9,6 +9,7 @@ import android.provider.ContactsContract
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.Button
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -26,21 +27,27 @@ class ObjectActivity : AppCompatActivity() {
     private lateinit var createButton: Button
     private lateinit var recyclerView: RecyclerView
     private var keyArrayList = arrayListOf<String>()
-    val myRef : DatabaseReference = FirebaseDatabase.getInstance("https://test-c0aba-default-rtdb.europe-west1.firebasedatabase.app").getReference("EstateObjects")
+
+    //Добавление databaseReference, где хранятся данные
+    val myRef : DatabaseReference = FirebaseDatabase
+        .getInstance("https://test-c0aba-default-rtdb.europe-west1.firebasedatabase.app")
+        .getReference("EstateObjects")
+
     lateinit var arrayList : ArrayList<EstateObject>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_object)
-        //Инициализация компонентов интерфейса
+
         logoutButton = findViewById(R.id.logout_button)
         createButton = findViewById(R.id.create_button)
         recyclerView = findViewById(R.id.object_recycle)
-
-
+        //Свойство, которое делает ориентацию для recyclerView вертикальной
         recyclerView.layoutManager = LinearLayoutManager(this)
+        //Добавление разделителя между объектами в recyclerView
+        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
-        arrayList = arrayListOf<EstateObject>()
+        arrayList = arrayListOf()
 
         getEstateObjects()
 
@@ -64,20 +71,25 @@ class ObjectActivity : AppCompatActivity() {
     }
 
     private fun getEstateObjects() {
+        //Получение массива объектов из Realtime Database
         myRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     arrayList.clear()
                     for (dataSnap in snapshot.children){
+                        //Добавление id данного объекта в массив id
                         keyArrayList.add(dataSnap.key.toString())
+                        //Преобразование hashmap в EstateObject и добавление его в arrayList<EstateObject>
                         val estateObject = dataSnap.getValue(EstateObject::class.java)
                         arrayList.add(estateObject!!)
                     }
+                    //Создание адаптера для RecyclerView
                     var adapter = EstateAdapter(this@ObjectActivity, arrayList)
                     recyclerView.adapter = adapter
+                    //Задание слушателя нажатия на элемент recyclerView
                     adapter.setOnItemClickListener(object : EstateAdapter.onItemClickListener{
                         override fun onItemClick(position: Int) {
-                            try {
+                            try {//Переход на окно с полной информацией объекта
                                 var intent = Intent(this@ObjectActivity, ChosenActivity::class.java)
                                 intent.putExtra("FirebaseID", keyArrayList[position])
                                 startActivity(intent)

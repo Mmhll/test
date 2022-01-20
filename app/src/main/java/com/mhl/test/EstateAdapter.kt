@@ -31,9 +31,10 @@ class EstateAdapter(var context: Context, var estateList : ArrayList<EstateObjec
 
     class MyVH (itemView: View, listener : onItemClickListener) : RecyclerView.ViewHolder(itemView) {
         var image : ImageView = itemView.findViewById(R.id.estateImage)
-        val cost : TextView = itemView.findViewById(R.id.estateCost)
-        val address : TextView = itemView.findViewById(R.id.estateAddress)
-
+        var cost : TextView = itemView.findViewById(R.id.estateCost)
+        var address : TextView = itemView.findViewById(R.id.estateAddress)
+        var space : TextView = itemView.findViewById(R.id.estateSpace)
+        //Инициализация слушателя для нажатия на экземпляр recyclerView
         init {
             itemView.setOnClickListener{
                     listener.onItemClick(adapterPosition)
@@ -47,9 +48,11 @@ class EstateAdapter(var context: Context, var estateList : ArrayList<EstateObjec
     }
 
     override fun onBindViewHolder(holder: MyVH, position: Int) {
+        //Передача данных в экземпляр recyclerView, полученных из estateList, где holder - представление estate_adapter
         Picasso.with(context).load(estateList[position].photo?.toUri()).into(holder.image)
-        holder.cost.text = estateList[position].cost.toString()
+        holder.cost.text = String.format("%.2fр",estateList[position].cost)
         holder.address.text = estateList[position].address
+        holder.space.text = String.format("%.1fм²", estateList[position].space)
     }
 
     override fun getItemCount(): Int {

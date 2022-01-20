@@ -10,6 +10,9 @@
     <Button
         android:id="@+id/button_change"
         android:text="Изменить"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +29,7 @@
 
     <TextView
         android:id="@+id/address_chosen"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -37,6 +41,7 @@
     <TextView
         android:id="@+id/space_chosen"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Площадь: "
@@ -47,6 +52,7 @@
     <TextView
         android:id="@+id/rooms_chosen"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Комнаты: "
@@ -57,6 +63,7 @@
     <TextView
         android:id="@+id/floor_chosen"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Этаж: "
@@ -67,6 +74,7 @@
     <TextView
         android:id="@+id/cost_chosen"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Цена: "
@@ -76,6 +84,7 @@
 
     <TextView
         android:id="@+id/m_cost_chosen"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Цена за метр²: "

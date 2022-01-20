@@ -4,12 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -18,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateActivity : AppCompatActivity() {
-    //Объявление переменных
+
     private lateinit var addImageButton: Button
     private lateinit var addressText :EditText
     private lateinit var spaceText: EditText
@@ -29,12 +28,14 @@ class CreateActivity : AppCompatActivity() {
     private lateinit var addObjectButton: Button
 
     lateinit var now : Date
-    //Инициализация констант
     val firebaseStorage = FirebaseStorage.getInstance().getReference("Images")
-    val GALLERY_REQUEST = 1
-    val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
-    val myRef = FirebaseDatabase.getInstance("https://test-c0aba-default-rtdb.europe-west1.firebasedatabase.app").getReference("/EstateObjects")
 
+    val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss")
+
+    //Добавление databaseReference, где хранятся данные
+    val myRef : DatabaseReference = FirebaseDatabase
+        .getInstance("https://test-c0aba-default-rtdb.europe-west1.firebasedatabase.app")
+        .getReference("EstateObjects")
     var dateNow = ""
     var downloadUri : Uri = Uri.EMPTY
 
@@ -44,7 +45,7 @@ class CreateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create)
 
-        //Инициализация элементов интерфейса
+
         addressText = findViewById(R.id.address_input)
         spaceText = findViewById(R.id.space_input)
         costText = findViewById(R.id.cost_input)
@@ -56,7 +57,7 @@ class CreateActivity : AppCompatActivity() {
         addImageButton.setOnClickListener {//Добавление слушателя для выбора изображения из галереи
             val intent = Intent(Intent.ACTION_PICK) //Параметр для intent, который даёт возможность выбрать какой-либо файл
             intent.type = "image/*"//Задание типа изображения для intent
-            startActivityForResult(intent, GALLERY_REQUEST)//Использование intent для получения результата (изображения)
+            startActivityForResult(intent, 1)//Использование intent для получения результата (изображения)
         }
 
         addObjectButton.setOnClickListener {
@@ -75,9 +76,9 @@ class CreateActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent)
 
         when(requestCode){
-            GALLERY_REQUEST ->
+            1 ->
                 if (resultCode == RESULT_OK){
-                    selectedImage = imageReturnedIntent?.data!!//Инициализация Uri переменной, которая несёт в себе ссылку на файл2
+                    selectedImage = imageReturnedIntent?.data!!//Инициализация Uri переменной, которая несёт в себе ссылку на полученный файл
                     Toast.makeText(this, "Файл выбран", Toast.LENGTH_SHORT).show()
                     addImageButton.setBackgroundColor(resources.getColor(R.color.green))//Смена цвета заднего фона кнопки для того, чтобы лучше было понятно, сделано ли это действие
                     now = Date()
@@ -87,8 +88,9 @@ class CreateActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(uri: Uri){
-        var ref : StorageReference = firebaseStorage.child(dateNow)
+        var ref : StorageReference = firebaseStorage.child(dateNow)//Добавление изображения в firebaseStorage (dateNow - название изображения)
         var up : UploadTask = ref.putFile(uri)
+        //Получение Uri загруженного в firebaseStorage файла
         var task : Task<Uri> = up.continueWithTask {
             ref.downloadUrl
         }.addOnCompleteListener {
@@ -106,11 +108,11 @@ class CreateActivity : AppCompatActivity() {
             floorText.text.toString().toInt())
         //Добавление объекта estate в Firebase Realtime Database
         myRef.child(dateNow).setValue(estate).addOnCompleteListener {
-            intentToObject()
+            intentToChosen()
         }
     }
-
-    private fun intentToObject(){
+    //Переход в Activity с созданным объектом
+    private fun intentToChosen(){
         val intent = Intent(this@CreateActivity, ChosenActivity::class.java)
         intent.putExtra("FirebaseID", dateNow)
         startActivity(intent)
@@ -121,7 +123,6 @@ class CreateActivity : AppCompatActivity() {
 
     private fun emptyText(text: EditText) : Boolean{
         if (text.text.toString().isEmpty()){
-            text.error = "Поле не может быть пустым"
             return false
         }
         return true

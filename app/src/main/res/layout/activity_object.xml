@@ -5,51 +5,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#808080"
+    android:paddingTop="15dp"
     tools:context=".ObjectActivity">
 
-  <androidx.appcompat.widget.Toolbar
-      android:id="@+id/toolbar"
-      android:layout_width="match_parent"
+
+  <Button
+      android:id="@+id/logout_button"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:background="@color/green"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="1.0"
+      android:layout_gravity="right"
+      android:backgroundTint="@color/blue"
+      android:text="Выйти"
+      android:layout_marginLeft="15dp"
+      android:textAllCaps="false"
+      android:textColor="@color/black"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
+      app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="15dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Выйти"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
-
-    <Button
-        android:id="@+id/create_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="15dp"
-        android:backgroundTint="#FFFFFF"
-        android:text="Создать"
-        android:textAllCaps="false"
-        android:textColor="@color/black" />
-
-  </androidx.appcompat.widget.Toolbar>
+  <Button
+      android:id="@+id/create_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="left"
+      android:backgroundTint="@color/green"
+      android:text="Создать"
+      android:layout_marginRight="15dp"
+      android:textAllCaps="false"
+      android:textColor="@color/black"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/object_recycle"
-      android:layout_width="392dp"
+      android:layout_width="match_parent"
       android:layout_height="706dp"
       android:layout_marginTop="1dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+      app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
